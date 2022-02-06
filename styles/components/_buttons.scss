@@ -1,0 +1,12 @@
+button.default {
+    background-color: $purple;
+    border-radius: 24px;
+    color: #fff;
+    font-weight: 700;
+    line-height: 15px;
+    letter-spacing: -.25px;
+
+    &:hover {
+        background-color: $lightPurple;
+    }
+}

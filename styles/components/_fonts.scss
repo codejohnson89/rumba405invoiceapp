@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Spartan:wght@300;400;600;700&display=swap');
+
+$primaryFont: 'Spartan', sans-serif;
+
+h1 {
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 36px;
+    letter-spacing: -1px;
+}
+
+h2 {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 22px;
+    letter-spacing: -.63px;
+}
+
+h3.big {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+    letter-spacing: -.8px;
+}
+
+h3.small {
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 15px;
+    letter-spacing: -.25px;
+}
+
+%body1 {
+    font-size: 12px;
+    line-height: 15px;
+    letter-spacing: -.25px;
+}
+
+%body2 {
+    font-size: 11px;
+    line-height: 18px;
+    letter-spacing: -.23px;
+}
