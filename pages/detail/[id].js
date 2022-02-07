@@ -32,9 +32,8 @@ export default function InvoiceDetail(props) {
         <>
             <HomeHeader detail={props.details} id={id} />
             <section className={styles.detailsContainer}>
-                <p>${props.details.data.orderId}</p>
+                <p>${props.details.data.paymentAmount}</p>
                  <p>{props.details.data.description}</p>
-                <p>{props.details.data.senderAddress.street}<br/>{props.details.data.senderAddress.city}<br/>{props.details.data.senderAddress.postCode}<br/>{props.details.data.senderAddress.country}</p>
                 <p>{props.details.data.createdAt}</p>
                 <p>{props.details.data.paymentDue}</p>
                 <p>{props.details.data.clientName}</p>

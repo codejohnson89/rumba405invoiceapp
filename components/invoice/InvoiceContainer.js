@@ -23,13 +23,13 @@ export default function InvoiceContainer(props) {
                     <Link href={"/detail/" + client.data.id}>
                         <a>
                             <div className="clientPreviewInfo">
-                                <div className="orderId">#{client.data.orderId}</div>
-                                <div className="dueDate">Due {client.data.paymentDue}</div>
+                                <div className="orderId">#{client.data.id}</div>
+                                <div className="dueDate">{client.data.paymentType}</div>
                                 <div className="clientName">{client.data.clientName}</div>
-                                <div className="total">&euro; {client.data.total}</div>
-                                <div className="status">{client.data.status}</div>
-                                <div>{index}</div>
+                                <div className="total">${client.data.paymentAmount}</div>
+                                <div className="status">{client.data.createdAt}</div>
                             </div>
+     
                         </a>
                     </Link>
                     </li>

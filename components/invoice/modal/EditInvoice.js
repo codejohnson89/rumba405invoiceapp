@@ -4,18 +4,19 @@ import { database } from '../../firebase/firebase';
 import { ref, set } from "firebase/database";
 import { useRouter } from 'next/router';
 
-import styles from './newinvoice.module.css'
+import styles from './newinvoice.module.css';
 import { useEffect, useState } from 'react';
 
-ReactModal.setAppElement("#react-modals")
 
-export default function EditInvoice(props) {
+ReactModal.setAppElement("#__next")
+
+export default function EditInvoice (props) {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const [formData, setFormData] = useState();
-    const { isOpen, closeModal, detail } = props;
     const router = useRouter();
     const id = router.query.id;
     const dbLink = `https://invoice-app-3fa85-default-rtdb.firebaseio.com/invoices/${id}.json`;
+
 
     function onSubmit(data) {
         const db = database;
@@ -31,16 +32,6 @@ export default function EditInvoice(props) {
         props.closeModal();
     }
 
-
-    // function onSubmit(data) {
-    //     console.log(data)
-    // }
-
-    useEffect(() => {
-        // fectchData();
-        console.log(formData)
-    })
-
     const fectchData = async () => {
         try {
             const res = await fetch(dbLink);
@@ -52,49 +43,40 @@ export default function EditInvoice(props) {
         }
     }
 
-    if (!formData) {
-        console.log('not working')
-        return <p>Loading....</p>
-    }
-
-
-
+    
     return (
         <>
-            <ReactModal isOpen={true} portalClassName="editInvoiceModal" parentSelector={() => document.querySelector('#react-modals')}>
-            <h1>Edit Invoice </h1>
-                <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-                    <label>Street Address</label>
-                    <input {...register("senderAddress.street")} defaultValue={detail.senderAddress.street}/>
-                 {/*    <label>City</label>
-                    <input {...register("senderAddress.city")} defaultValue={formData.senderAddress.city}/>
-                    <label>Postal Code</label>
-                    <input {...register("senderAddress.postCode")} defaultValue={formData.senderAddress.postCode}/>
-                    <label>Country</label>
-                    <input {...register("senderAddress.country")} defaultValue={formData.senderAddress.country}/>                    
+            
+            <ReactModal isOpen={props.isOpen}>
+            <h1>New Invoice</h1>
+                <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>                   
                     <label>Client&quot;s Name</label>
-                    <input {...register("clientName")} defaultValue={formData.clientName}/>
+                    <input {...register("clientName")} defaultValue={props.details.data.clientName}/>
                     <label>Client&quot;s Email</label>
-                    <input {...register("clientEmail")} defaultValue={formData.clientEmail}/>
+                    <input {...register("clientEmail")} defaultValue={props.details.data.clientEmail}/>
                     <label>Street Address</label>
-                    <input {...register("clientAddress.street")} defaultValue={formData.clientAddress.street}/>
+                    <input {...register("clientAddress.street")} defaultValue={props.details.data.clientAddress.street}/>
                     <label>City</label>
-                    <input {...register("clientAddress.city")} defaultValue={formData.clientAddress.city}/>
+                    <input {...register("clientAddress.city")} defaultValue={props.details.data.clientAddress.city}/>
                     <label>Postal Code</label>
-                    <input {...register("clientAddress.postCode")} defaultValue={formData.clientAddress.postCode}/>
+                    <input {...register("clientAddress.state")} defaultValue={props.details.data.clientAddress.state}/>
                     <label>Country</label>
-                    <input {...register("clientAddress.country")} defaultValue={formData.clientAddress.country}/>
-                    <label>Invoice Date</label>
-                    <input {...register("createdAt")} defaultValue={formData.createdAt}/>
-                    <label>Payment Terms</label>
-                    <input {...register("paymentTerms")} defaultValue={formData.paymentTerms}/>
+                    <input {...register("clientAddress.country")} defaultValue={props.details.data.clientAddress.country}/>
+                    <label>Payment/Expense</label>
+                    <select {...register("paymentType")} >
+                        <option value="expense">Expense</option>
+                        <option value="payment">Payment</option>
+                    </select>
+                    <label>Payment</label>
+                    <input {...register("paymentAmount")} />
                     <label>Project Description</label>
-                    <input {...register("description")} defaultValue={formData.description}/>                    
+                    <input {...register("description")} defaultValue={props.details.data.description}/>                    
                     {/* //Item list goes here */}
+                    <input {...register("items")} />
 
                     <input type="submit" placeholder="Submit"/>
-                 </form> 
-                <button onClick={closeModal}>Close</button>
+                </form>
+                <button onClick={props.closeModal}>Close</button>
             </ReactModal>
 
         </>

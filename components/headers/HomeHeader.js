@@ -43,10 +43,7 @@ export default function HomeHeader(props) {
         console.log(id)
         const db = database;
         remove(ref(db, 'invoices/' + id))
-    }
-
-    function markAsPaidInvoiceHandler() {
-        console.log('paid')
+        window.location.pathname = '/'
     }
 
 
@@ -61,7 +58,6 @@ export default function HomeHeader(props) {
                     <div>
                         <button onClick={openEditInvoiceModalHandler}>Edit</button>
                         <button onClick={deleteInvoiceHandler}>Delete</button>
-                        <button onClick={markAsPaidInvoiceHandler}>Mark as Paid</button>
                     </div>
                 </div>
                 <EditInvoice isOpen={editInvoiceModalIsOpen} closeModal={closeEditInvoiceModalHandler} details={detail}/>
