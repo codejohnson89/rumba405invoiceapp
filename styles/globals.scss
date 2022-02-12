@@ -31,3 +31,24 @@ a {
   padding: 0px !important;
   max-width: 616px;
 }
+
+input,
+textarea {
+  max-width: 100%;
+  width: 100%;
+}
+
+label {
+  text-align: left;
+  width: 100%;
+}
+
+body {
+  background-color: #000;
+}
+
+@media only screen and (max-width: 560px) {
+  .ReactModal__Overlay {
+    left: 0 !important;
+  }
+}

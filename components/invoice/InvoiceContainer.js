@@ -7,7 +7,6 @@ export default function InvoiceContainer(props) {
 
     return (
         <>
-        <h1>Invoice container</h1>
             <ul className={styles.invoiceList}>
                 {data.map((client, index) => {
                     console.log(index)
@@ -22,12 +21,13 @@ export default function InvoiceContainer(props) {
                     
                     <Link href={"/detail/" + client.data.id}>
                         <a>
-                            <div className="clientPreviewInfo">
-                                <div className="orderId">#{client.data.id}</div>
-                                <div className="dueDate">{client.data.paymentType}</div>
-                                <div className="clientName">{client.data.clientName}</div>
-                                <div className="total">${client.data.paymentAmount}</div>
-                                <div className="status">{client.data.createdAt}</div>
+                            <div className={styles.clientPreviewInfo}>
+                                <span className={styles.orderId}>#{client.data.id}</span>
+                                <span className={styles.status}>{client.data.createdAt}</span>
+                                <span className={styles.clientName}>{client.data.clientName}</span>
+                                <span className={styles.total}>${client.data.paymentAmount}</span>
+                                <span className={styles.paymentType}>{client.data.paymentType}</span>
+
                             </div>
      
                         </a>

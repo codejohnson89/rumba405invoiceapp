@@ -1,7 +1,7 @@
 import styles from './homeheader.module.css';
 import { useRouter } from 'next/router';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import NewInvoice from '../invoice/modal/NewInvoice';
 import Link from 'next/link';
 
@@ -19,7 +19,7 @@ export default function HomeHeader(props) {
     const [editInvoiceModalIsOpen, setEditInvoiceOpen] = useState(false);
     const router = useRouter();
     const pathName = router.pathname;
-    const { data, count, id, detail } = props;
+    const { data, count, id, detail, width } = props;
 
 
     function openNewInvoiceModalHandler() {
@@ -42,9 +42,13 @@ export default function HomeHeader(props) {
         console.log('delete')
         console.log(id)
         const db = database;
-        remove(ref(db, 'invoices/' + id))
+        remove(ref(db, '/invoices/' + id))
         window.location.pathname = '/'
     }
+
+    useEffect(() => {
+        console.log(props.width)
+    })
 
 
     if (pathName === '/detail/[id]') {
@@ -71,14 +75,18 @@ export default function HomeHeader(props) {
         <div className={styles.headerwrapper}>
             <div className={styles.leftside}>
                 <h1 className={styles.header}>Invoices</h1>
-                <p className={styles.text}>There are {count} total invoices</p>
+                {
+                    width > 426 ?  <p className={styles.text}>There are {count} total invoices</p> : <p className={styles.text}> {count} invoices</p>
+                }
+                
             </div>            
             <div className="right-side">
                 <select className={styles.filter} id="filter" placeholder="Filter by status">
-                    <option value="1">Option 1</option>
-                    <option value="2">Option 2</option>
+                    <option className="option" value="">FILTER BY STATUS</option>
+                    <option className="option" value="PAYMENT">Payment</option>
+                    <option className="option" value="EXPENSE">Expense</option>
                 </select>
-                <button className={styles.button} onClick={openNewInvoiceModalHandler}>New Invoice</button>
+                <button className={styles.button} onClick={openNewInvoiceModalHandler}>New <span className={styles.invoiceText}>Invoice</span></button>
             </div>
             <NewInvoice isOpen={newInvoiceModalIsOpen} closeModal={closeNewInvoiceModalHandler} count={count}/>
         </div>

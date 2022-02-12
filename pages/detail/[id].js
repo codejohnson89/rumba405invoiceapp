@@ -8,41 +8,41 @@ export default function InvoiceDetail(props) {
     const router = useRouter();
     const {id} = router.query;
 
-
-    // useEffect(() => {
-
-    //     console.log(id)
-    //     fetch(`https://invoice-app-3fa85-default-rtdb.firebaseio.com/invoices/${id}.json`)
-    //         .then(res => res.json())
-    //         .then(data => {
-    //             console.log(data)
-    //             // let dataArr = Object.values(data)
-    //             // console.log(dataArr)
-    //             setDetail(data)
-    //         })
-
-    // }, [id])
-
     if (!props.details) {
         return <h1>Loading....</h1>
     }
 
 
     return (
-        <>
-            <HomeHeader detail={props.details} id={id} />
-            <section className={styles.detailsContainer}>
-                <p>${props.details.data.paymentAmount}</p>
-                 <p>{props.details.data.description}</p>
-                <p>{props.details.data.createdAt}</p>
-                <p>{props.details.data.paymentDue}</p>
-                <p>{props.details.data.clientName}</p>
-                <p>{props.details.data.clientAddress.street}<br/>{props.details.data.clientAddress.city}<br/>{props.details.data.clientAddress.postCode}<br/>{props.details.data.clientAddress.country}</p>
-                <p>{props.details.data.clientEmail}</p>
-                {/* <p>{props.details.data.items[0].name}{props.details.data.items[0].quantity}{props.details.data.items[0].price}{props.details.data.items[0].total}</p> */}
-                <p>{props.details.data.total}</p> 
-            </section>
-        </>
+        <main className={styles.main}>
+            <div className={styles.container}>
+                <HomeHeader detail={props.details} id={id} />
+                <section className={styles.detailsContainer}>
+                    <div className={styles.topSection}>
+                        <div className={styles.info}>
+                            <p>{props.details.data.id}</p>
+                            <p>{props.details.data.description}</p>
+                        </div>
+                        <div className={styles.address}>
+                            <p>
+                            {props.details.data.clientAddress.street}<br/>
+                            {props.details.data.clientAddress.city}<br/>
+                            {props.details.data.clientAddress.state}<br/>
+                            {props.details.data.clientAddress.country}
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <p>${props.details.data.paymentAmount}</p>
+                    <p>{props.details.data.createdAt}</p>
+                    <p>{props.details.data.paymentDue}</p>
+                    <p>{props.details.data.clientName}</p>
+                    <p>{props.details.data.clientEmail}</p>
+                    {/* <p>{props.details.data.items[0].name}{props.details.data.items[0].quantity}{props.details.data.items[0].price}{props.details.data.items[0].total}</p> */}
+                    <p>{props.details.data.total}</p> 
+                </section>
+            </div>
+        </main>
     )
 }
 
@@ -64,13 +64,3 @@ export async function getServerSideProps(context) {
         },
     }
 }
-
-// export async function getStaticPaths() {
-//     const data =  await fetch(`https://invoice-app-3fa85-default-rtdb.firebaseio.com/invoices.json`);
-//     const dataArr = Object.values(data)
-//     const dataId = dataArr.map(content => ({ params: { id: content.id}}))
-//     return {
-//         paths: [],
-//         fallback: 'blocking'
-//     }
-// }

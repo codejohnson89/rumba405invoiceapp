@@ -1,3 +1,41 @@
-.detailsContainer {
+.container {
+    background-color: #f2f2f2;
+    position: relative;
+    top: 197px;
+    width: 100%;
+}
+
+.main {
     margin-left: 103px;
+    height: 100vh;
+    background-color: #f2f2f2;
+}
+
+.detailsContainer {
+    max-width: 730px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 1em;
+    box-shadow: 3px 1px 5px #333;
+}
+
+.topSection {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.address {
+    text-align: right;
+}
+
+.info {
+    text-align: left;
+}
+
+@media only screen and (max-width: 560px) {
+    .main {
+        margin: 0;
+    }
 }

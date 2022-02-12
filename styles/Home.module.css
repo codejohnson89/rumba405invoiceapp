@@ -1,7 +1,18 @@
 .container {
 width: 100%;
+position: relative;
+top: 197px;
 }
 
 .main {
   margin-left: 103px;
+  height: 100vh;
+background-color: #f2f2f2;
+
+}
+
+@media only screen and (max-width: 560px) {
+  .main {
+    margin-left: 0;
+  }
 }
