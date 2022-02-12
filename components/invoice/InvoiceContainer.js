@@ -9,8 +9,7 @@ export default function InvoiceContainer(props) {
         <>
             <ul className={styles.invoiceList}>
                 {data.map((client, index) => {
-                    console.log(index)
-                    console.log(client)
+                    
                     if(client == null) {
                         console.log('empty invoice')
                         return;

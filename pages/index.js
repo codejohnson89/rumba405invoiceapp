@@ -12,7 +12,7 @@ export default function Home(props) {
 
   useEffect(() => {
     setWidth(getWidth.current.clientWidth)
-  })
+  }, [])
   
   return (
     <>

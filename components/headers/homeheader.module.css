@@ -89,4 +89,8 @@
     .headerwrapper {
         justify-content: space-around;
     }
+
+    .button::before {
+        top: 2px;
+    }
 }
